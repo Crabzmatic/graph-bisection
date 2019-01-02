@@ -27,10 +27,9 @@ inline auto findCutSize(
                     cutSize++;
                 it.operator++();
             }
-
         }
     }
-    return cutSize;
+    return cutSize/2;
 }
 
 inline auto doBisection(
@@ -39,8 +38,8 @@ inline auto doBisection(
 
 ) {
     auto bisection = std::set<Vertex>();
+    // double upperBound = G.order() / 6;
     int cutSize = 0,
-        upperBound = (1 / 6) * G.order(),
         half = G.order() % 2 == 0 ? G.order() / 2 : (G.order() + 1) / 2,
         inserted = 0;
     for (auto &rot : G) {
@@ -54,7 +53,8 @@ inline auto doBisection(
     Vertex removed, added;
     auto excludedAdd = std::set<Vertex>();
     auto excludedRemove = std::set<Vertex>();
-    while (cutSize > upperBound) {
+    //while (cutSize > upperBound) {
+    while (true) {
         int minCutSize = cutSize,
             minCutSizeDiff = 0;
         auto minBisection = std::set<Vertex>();
@@ -222,6 +222,7 @@ int main() {
 
     auto sg1 = StoredGraphs::create<SnarkStorageDataG4C4>(cfg);
     Graph g(sg1->get_graph(10, 0));
+
 */  int n,
         m;
     Graph g = Graph();
@@ -240,6 +241,11 @@ int main() {
 
     std::cout << g.size() << " " << g.order() << std::endl;
 
-    std::cout << findCutSize(doBisection(g), g) << '\n';
+    std::set<Vertex> bisection = doBisection(g);
+
+    std::cout << "Final cut size: " << findCutSize(bisection, g) << '\n';
+
+    std::cout << "Number of vertices in bisection is " << bisection.size() << ", while number of vertices in graph is " << g.order() << std::endl;
+
     return 0;
 }
