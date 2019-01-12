@@ -1,4 +1,4 @@
-#include "src/bisection.hpp"
+#include "bisection.hpp"
 
 int main() {
     int n, m;

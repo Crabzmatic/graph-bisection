@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../../src/bisection.hpp"
+#include "bisection.hpp"
 
 TEST(testMath, myTest)
 {
