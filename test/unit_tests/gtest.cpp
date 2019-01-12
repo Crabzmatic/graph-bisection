@@ -1,19 +1,69 @@
 #include <gtest/gtest.h>
 #include "bisection.hpp"
 
-TEST(testMath, myTest)
+TEST(testInput, degree_cubic)
 {
-    EXPECT_EQ(1, 1);
+    Graph g = Graph();
+
+    for (int j = 0; j < 4; ++j) {
+        addV(g, createV());
+    }
+
+    for (int k = 0; k < 4; ++k) {
+        for (int j = 0; j < 4; ++j) {
+            if (k < j)
+                addE(g, g[k].v(), g[j].v());
+        }
+    }
+
+    bool degreeCubic = true;
+
+    for (auto &rot : g) {
+        if (rot.degree() != 3)
+            degreeCubic = false;
+    }
+
+
+    EXPECT_EQ(degreeCubic, true);
 }
 
-TEST(testMath, myTest2)
+TEST(testBisection, bisectionOnSquareWithDiagonals)
 {
-    EXPECT_NE(1, 2);
+    Graph g = Graph();
+
+    for (int j = 0; j < 4; ++j) {
+        addV(g, createV());
+    }
+
+    for (int k = 0; k < 4; ++k) {
+        for (int j = 0; j < 4; ++j) {
+            if (k < j)
+                addE(g, g[k].v(), g[j].v());
+        }
+    }
+
+    EXPECT_EQ(findCutSize(g,doBisection(g)), 4);
 }
 
-TEST(testMath, myTest3)
+TEST(testBisection, CutSizeOneVertexSquareWithDiagonals)
 {
-    EXPECT_EQ(3, 3);
+    Graph g = Graph();
+
+    for (int j = 0; j < 4; ++j) {
+        addV(g, createV());
+    }
+
+    for (int k = 0; k < 4; ++k) {
+        for (int j = 0; j < 4; ++j) {
+            if (k < j)
+                addE(g, g[k].v(), g[j].v());
+        }
+    }
+
+    auto bisection = std::set<Vertex>();
+    bisection.insert(g[0].v());
+
+    EXPECT_EQ(findCutSize(g, bisection), 3);
 }
 
 int main(int argc, char **argv) {

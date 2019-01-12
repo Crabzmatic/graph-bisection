@@ -107,7 +107,7 @@ void fillBisection(const Graph &G, std::set<Vertex> &bisection) {
 std::set<Vertex> iterateBisection(const Graph &G, std::set<Vertex> &bisection) {
 
     int cutSize = findCutSize(G, bisection);
-    std::cout<< "Process started with cut size: " << cutSize << std::endl;
+    //std::cout<< "Process started with cut size: " << cutSize << std::endl;
 
     Vertex removed, added;
     auto excludedAdd = std::set<Vertex>();
@@ -123,13 +123,13 @@ std::set<Vertex> iterateBisection(const Graph &G, std::set<Vertex> &bisection) {
                              minCutSizeDiff, minBisection, addedSomething);
 
         if (!addedSomething){
-            std::cout << "Did not find any suitable Vertex to add. Cut size is: " << cutSize << std::endl;
+            //std::cout << "Did not find any suitable Vertex to add. Cut size is: " << cutSize << std::endl;
             break;
         }
         if (minCutSize < cutSize) {
-            std::cout << "Vertex was added that reduced cut size to: " << minCutSize << std::endl;
+            //std::cout << "Vertex was added that reduced cut size to: " << minCutSize << std::endl;
         } else {
-            std::cout << "Vertex was added. Cut size is still: " << minCutSize << std::endl;
+            //std::cout << "Vertex was added. Cut size is still: " << minCutSize << std::endl;
         }
 
         int newCutSize;
@@ -140,17 +140,17 @@ std::set<Vertex> iterateBisection(const Graph &G, std::set<Vertex> &bisection) {
                                 removed, newCutSize, newBisection, removedSomething);
 
         if (!removedSomething) {
-            std::cout << "Did not find any suitable Vertex to remove. Will not consider adding the same Vertex in next iteration." << std::endl;
+            //std::cout << "Did not find any suitable Vertex to remove. Will not consider adding the same Vertex in next iteration." << std::endl;
             excludedAdd.insert(added);
             continue;
         }
         if (added == removed){
-            std::cout << "Tried to remove the Vertex that was added. Will not consider removing this Vertex in next iteration." << std::endl;
+            //std::cout << "Tried to remove the Vertex that was added. Will not consider removing this Vertex in next iteration." << std::endl;
             excludedRemove.insert(removed);
             continue;
         }
         if (newCutSize == cutSize) {
-            std::cout << "Cut size did not change after this iteration. Will not consider adding the same Vertex in next iteration." << std::endl;
+            //std::cout << "Cut size did not change after this iteration. Will not consider adding the same Vertex in next iteration." << std::endl;
             excludedAdd.insert(added);
             excludedRemove.clear();
             continue;
@@ -159,7 +159,7 @@ std::set<Vertex> iterateBisection(const Graph &G, std::set<Vertex> &bisection) {
         bisection = newBisection;
         excludedAdd.clear();
         excludedRemove.clear();
-        std::cout << "Vertex removed. Successfully reduced cut size to: " << cutSize << std::endl;
+        //std::cout << "Vertex removed. Successfully reduced cut size to: " << cutSize << std::endl;
     }
     return bisection;
 }
