@@ -68,13 +68,13 @@ inline int findCutSize(
     return cutSize;
 }
 
-void addVertexInBisection(
+inline MinBsc addVertexInBisection(
         const Graph &G,
         const std::set<Vertex> &bisection,
         int cutSize,
-        Adding adding,
-        MinBsc minBsc
+        Adding &adding
 ) {
+    MinBsc minBsc = MinBsc();
     minBsc.minCutSize = cutSize;
     adding.addedSomething = false;
 
@@ -96,16 +96,17 @@ void addVertexInBisection(
             }
         }
     }
+    return minBsc;
 }
 
-NewBsc removeVertexInBisection(
+inline NewBsc removeVertexInBisection(
         const Graph &G,
         const std::set<Vertex> &bisection,
         int cutSize,
-        Removing removing,
-        MinBsc minBsc
+        Removing &removing,
+        MinBsc &minBsc
 ) {
-    NewBsc newBsc;
+    NewBsc newBsc = NewBsc();
     newBsc.newCutSize = cutSize;
     removing.removedSomething = false;
     for (auto &rot : G) {
@@ -127,7 +128,7 @@ NewBsc removeVertexInBisection(
     return newBsc;
 }
 
-void fillBisection(const Graph &G, std::set<Vertex> &bisection) {
+inline void fillBisection(const Graph &G, std::set<Vertex> &bisection) {
     int inserted  = 0,
         half = G.order() % 2 == 0 ? G.order() / 2 : (G.order() + 1) / 2;
     for (auto &rot : G) {
@@ -138,7 +139,7 @@ void fillBisection(const Graph &G, std::set<Vertex> &bisection) {
     }
 }
 
-std::set<Vertex> iterateBisection(const Graph &G, std::set<Vertex> &bisection) {
+inline std::set<Vertex> iterateBisection(const Graph &G, std::set<Vertex> &bisection) {
 
     int cutSize = findCutSize(G, bisection);
     //std::cout<< "Process started with cut size: " << cutSize << std::endl;
@@ -148,21 +149,19 @@ std::set<Vertex> iterateBisection(const Graph &G, std::set<Vertex> &bisection) {
 
     while (true) {
 
-        MinBsc minBsc = MinBsc();
-        addVertexInBisection(G, bisection, cutSize, adding, minBsc);
+        MinBsc minBsc = addVertexInBisection(G, bisection, cutSize, adding);
 
         if (!adding.addedSomething){
             //std::cout << "Did not find any suitable Vertex to add. Cut size is: " << cutSize << std::endl;
             break;
         }
         /*if (minBsc.minCutSize < cutSize) {
-            std::cout << "Vertex was added that reduced cut size to: " << minCutSize << std::endl;
+            std::cout << "Vertex was added that reduced cut size to: " << minBsc.minCutSize << std::endl;
         } else {
-            std::cout << "Vertex was added. Cut size is still: " << minCutSize << std::endl;
+            std::cout << "Vertex was added. Cut size is still: " << minBsc.minCutSize << std::endl;
         }*/
 
-        NewBsc newBisection;
-        newBisection = removeVertexInBisection(G, bisection, cutSize, removing, minBsc);
+        NewBsc newBisection = removeVertexInBisection(G, bisection, cutSize, removing, minBsc);
 
         if (!removing.removedSomething) {
             //std::cout << "Did not find any suitable Vertex to remove. Will not consider adding the same Vertex in next iteration." << std::endl;
@@ -192,7 +191,6 @@ std::set<Vertex> iterateBisection(const Graph &G, std::set<Vertex> &bisection) {
 inline std::set<Vertex> doBisection(const Graph &G) {
     auto bisection = std::set<Vertex>();
     fillBisection(G, bisection);
-    bisection = iterateBisection(G, bisection);
-    return bisection;
+    return iterateBisection(G, bisection);
 }
 #endif
