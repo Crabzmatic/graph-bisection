@@ -3,7 +3,7 @@
 
 TEST(testInput, degree_cubic)
 {
-    Graph g = Graph();
+    Graph g(createG());
 
     for (int j = 0; j < 4; ++j) {
         addV(g, createV());
@@ -29,7 +29,7 @@ TEST(testInput, degree_cubic)
 
 TEST(testBisection, bisectionOnSquareWithDiagonals)
 {
-    Graph g = Graph();
+    Graph g(createG());
 
     for (int j = 0; j < 4; ++j) {
         addV(g, createV());
@@ -47,7 +47,7 @@ TEST(testBisection, bisectionOnSquareWithDiagonals)
 
 TEST(testBisection, CutSizeOneVertexSquareWithDiagonals)
 {
-    Graph g = Graph();
+    Graph g(createG());
 
     for (int j = 0; j < 4; ++j) {
         addV(g, createV());

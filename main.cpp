@@ -2,7 +2,7 @@
 
 int main() {
     int n, m;
-    Graph g = Graph();
+    Graph g(createG());
     std::cin >> n;
 
     for (int j = 0; j < n; ++j) {
