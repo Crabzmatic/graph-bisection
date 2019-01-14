@@ -4,8 +4,8 @@ Algorithm for graph partitioning approximation. The goal is to find a set of ver
 Made with _ba-graph_ library (https://bitbucket.org/relatko/ba-graph). Relative path should be:
 
 project/
-  ba-graph/
-  graph-bisection/
+-  ba-graph/
+-  graph-bisection/
 
 Function _doBisection()_ returns a set of vertices that belong to the bisection.
 This function was done for cubic graphs, mainly.
