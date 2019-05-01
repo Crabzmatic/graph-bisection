@@ -21,6 +21,7 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
 project(graph_bisection)
 
 set(CMAKE_CXX_STANDARD 17)
+#set(DBGFLAGS "-g -O0 -fconcepts -Wall -Wextra -pedantic -DDEBUG")
 set(DBGFLAGS "-g -O0 -fconcepts -Wall -Wextra -pedantic")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 ${DBGFLAGS}")
 set(BA_GRAPH "-DBA_GRAPH_DEBUG -I ../ba-graph/include/")
