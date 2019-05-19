@@ -9,6 +9,6 @@ project/
 
 Function _doIterativeBisection()_ returns a set of vertices that belong to the bisection and does this using something I called "Single vertex exchange iterative" bisection method.
 
-Function _doGrowingBisection_ returns a set of vertices that belong to the bisection and does this using "Parallel growing bisection" which selectes a couple of vertices at random and starts spreading around them until there are half of the vertices in the set. This is done on separate threads and if the graph has fewer than 300 vertices than the algorithm will try expanding from every vertex.
+Function _doGrowingBisection()_ returns a set of vertices that belong to the bisection and does this using "Parallel growing bisection" which selectes a couple of vertices at random and starts spreading around them until there are half of the vertices in the set. This is done on separate threads and if the graph has fewer than 300 vertices than the algorithm will try expanding from every vertex.
 
 These functions were done for cubic graphs.
