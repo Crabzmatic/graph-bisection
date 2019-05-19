@@ -31,7 +31,7 @@ TEST(testBisection, bisectionOnSquareWithDiagonals)
                 addE(g, g[k].v(), g[j].v());
         }
     }
-    EXPECT_EQ(findCutSize(g,doBisection(g)), 4);
+    EXPECT_EQ(findCutSize(g,doIterativeBisection(g)), 4);
 }
 TEST(testBisection, CutSizeOneVertexSquareWithDiagonals)
 {
