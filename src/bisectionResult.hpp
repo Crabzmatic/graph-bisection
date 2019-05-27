@@ -1,8 +1,6 @@
+#ifndef BISECTION_RESULT_HPP
+#define BISECTION_RESULT_HPP
 #include <utility>
-
-#ifndef GRAPH_BISECTION_BISECTIONRESULT_HPP
-#define GRAPH_BISECTION_BISECTIONRESULT_HPP
-
 using namespace ba_graph;
 class BisectionResult{
 protected:
