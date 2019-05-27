@@ -1,6 +1,7 @@
 #include <ctime>
-#include "bisection.hpp"
-#include "growingBisection.hpp"
+#include <iterativeBisection.hpp>
+#include <growingBisection.hpp>
+#include <combinedBisection.hpp>
 
 void printBisectionStats(const Graph &g, clock_t t, const BisectionResult &result, const std::string &bisectionMethod);
 
@@ -23,22 +24,21 @@ int main() {
 
     // BISECTION 1
     clock_t t1 = clock();
-    BisectionResult iterativeResult = doIterativeBisection(g);
+    BisectionResult result = doIterativeBisection(g);
     t1 = clock() - t1;
-    printBisectionStats(g, t1, iterativeResult, "Single vertex exchange iterative bisection");
+    printBisectionStats(g, t1, result, "Single vertex exchange iterative bisection");
 
     // BISECTION 2
     clock_t t2 = clock();
-    BisectionResult result = doGrowingBisection(g);
+    result = doGrowingBisection(g, false);
     t2 = clock() - t2;
     printBisectionStats(g, t2, result, "Parallel growing bisection");
 
     // BISECTION 3
     clock_t t3 = clock();
-    std::set<Vertex> starting_bsc = result.getBisection();
-    BisectionResult combinedResult = iterateBisection(g, starting_bsc);
+    result = doCombinedBisection(g);
     t3 = clock() - t3;
-    printBisectionStats(g, t3, combinedResult, "Iterative with growing starting bisection");
+    printBisectionStats(g, t3, result, "Iterative with growing starting bisection");
     return 0;
 }
 

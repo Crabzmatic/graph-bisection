@@ -1,6 +1,6 @@
 project(${CMAKE_PROJECT_NAME}_lib)
 
-set(HEADER_FILES bisection.hpp growingBisection.hpp bisectionResult.hpp)
+set(HEADER_FILES bisectionUtilities.hpp iterativeBisection.hpp growingBisection.hpp bisectionResult.hpp )
 set(SOURCE_FILES)
 
 if (EXISTS ${SOURCE_FILES})

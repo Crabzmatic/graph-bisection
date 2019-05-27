@@ -1,15 +1,16 @@
 #ifndef ITERATIVE_BISECTION_HPP
 #define ITERATIVE_BISECTION_HPP
 #ifdef DEBUG
-    #define D if(true)
+#define D if(true)
 #else
-    #define D if(false)
+#define D if(false)
 #endif
 #include <set>
 #include <iostream>
 #include "../../ba-graph/include/impl/basic/include.hpp"
 #include "../../ba-graph/include/impl/basic/graph.h"
-#include "bisectionResult.hpp"
+#include <bisectionResult.hpp>
+#include <bisectionUtilities.hpp>
 
 using namespace ba_graph;
 struct MinBsc {
@@ -110,7 +111,7 @@ inline BisectionResult removeVertexInBisection(
 }
 inline void fillBisection(const Graph &G, std::set<Vertex> &bisection) {
     int inserted  = 0,
-        half = G.order() % 2 == 0 ? G.order() / 2 : (G.order() + 1) / 2;
+        half = graphHalf(G);
     for (auto &rot : G) {
         if (inserted < half) {
             bisection.insert(rot.v());
