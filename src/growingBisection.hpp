@@ -31,7 +31,7 @@ inline void removeVertex(
         std::vector<Vertex> &unvisited,
         const Vertex &seed
         ) {
-    for (unsigned int i = 0; i < unvisited.size(); ++i) {
+    for (unsigned long long i = 0; i < unvisited.size(); ++i) {
         if (unvisited[i] == seed) {
             unvisited.erase(unvisited.begin() + i);
         }

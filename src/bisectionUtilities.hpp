@@ -5,7 +5,7 @@
 #include <random>
 #include "../../ba-graph/include/impl/basic/include.hpp"
 #include "../../ba-graph/include/impl/basic/graph.h"
-inline unsigned long long graphHalf(const Graph &G){
+inline int graphHalf(const Graph &G){
     return G.order() % 2 == 0 ? G.order() / 2 : (G.order() + 1) / 2;
 }
 inline unsigned int hardwareConcurrency(){
